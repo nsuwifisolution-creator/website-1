@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kontak - Indotel</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --navy: #0A2540; --navy-dark: #061829; --cyan: #00D4FF; --cyan-dark: #00A8CC; --gray-light: #F5F7FA; --gray: #6B7A8F; --text: #1A2B42; --shadow: 0 10px 40px rgba(10,37,64,0.08); --shadow-lg: 0 20px 60px rgba(10,37,64,0.15); --transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
+body { font-family: 'Poppins', sans-serif; color: var(--text); line-height: 1.6; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 50px; font-weight: 600; font-size: 15px; cursor: pointer; border: none; transition: var(--transition); font-family: inherit; }
+.btn-primary { background: linear-gradient(135deg, var(--cyan), var(--cyan-dark)); color: var(--navy); box-shadow: 0 8px 24px rgba(0,212,255,0.35); }
+.btn-primary:hover { transform: translateY(-3px); }
+.btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.3); }
+.btn-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--cyan); color: var(--cyan); }
+
+.navbar { position: fixed; top: 0; left: 0; width: 100%; padding: 18px 0; z-index: 1000; background: rgba(10,37,64,0.95); backdrop-filter: blur(20px); }
+.nav-wrap { display: flex; justify-content: space-between; align-items: center; }
+.logo { display: flex; align-items: center; gap: 10px; font-size: 24px; font-weight: 800; color: #fff; }
+.logo-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--cyan), var(--cyan-dark)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--navy); font-size: 20px; }
+.logo span { color: var(--cyan); }
+.nav-menu { display: flex; gap: 32px; align-items: center; }
+.nav-menu a { color: rgba(255,255,255,0.85); font-weight: 500; font-size: 15px; transition: var(--transition); }
+.nav-menu a:hover, .nav-menu a.active { color: var(--cyan); }
+.nav-cta { display: flex; gap: 12px; align-items: center; }
+.hamburger { display: none; background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; }
+@media (max-width: 768px) { .nav-menu { display: none; } .hamburger { display: block; } }
+
+.page-header { background: linear-gradient(135deg, var(--navy-dark), var(--navy) 50%, #0d3055); padding: 160px 0 80px; text-align: center; color: #fff; position: relative; overflow: hidden; }
+.page-header::before { content: ''; position: absolute; top: -50%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(0,212,255,0.15) 0%, transparent 70%); border-radius: 50%; }
+.page-header h1 { font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 800; margin-bottom: 16px; position: relative; z-index: 2; }
+.page-header p { color: rgba(255,255,255,0.75); font-size: 17px; max-width: 640px; margin: 0 auto; position: relative; z-index: 2; }
+.breadcrumb { display: inline-flex; align-items: center; gap: 10px; background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); padding: 8px 18px; border-radius: 50px; font-size: 13px; color: var(--cyan); margin-bottom: 20px; position: relative; z-index: 2; }
+.breadcrumb a { color: rgba(255,255,255,0.7); }
+
+section { padding: 100px 0; }
+.section-tag { display: inline-block; color: var(--cyan-dark); background: rgba(0,212,255,0.1); padding: 6px 18px; border-radius: 50px; font-size: 13px; font-weight: 600; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
+
+.contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 48px; }
+.contact-info { display: flex; flex-direction: column; gap: 20px; }
+.contact-card { background: #fff; border: 2px solid #E8EDF3; border-radius: 16px; padding: 28px; transition: var(--transition); }
+.contact-card:hover { border-color: var(--cyan); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.contact-card-icon { width: 52px; height: 52px; background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(0,212,255,0.05)); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: var(--cyan-dark); font-size: 22px; margin-bottom: 16px; transition: var(--transition); }
+.contact-card:hover .contact-card-icon { background: linear-gradient(135deg, var(--cyan), var(--cyan-dark)); color: #fff; transform: rotate(-8deg) scale(1.05); }
+.contact-card h3 { font-size: 17px; color: var(--navy); margin-bottom: 8px; }
+.contact-card p { color: var(--gray); font-size: 14px; line-height: 1.7; margin-bottom: 4px; }
+.contact-card a { color: var(--cyan-dark); font-weight: 600; font-size: 14px; transition: var(--transition); }
+.contact-card a:hover { color: var(--navy); }
+
+.contact-form-card { background: #fff; border-radius: 24px; padding: 48px; box-shadow: var(--shadow-lg); border: 1px solid #E8EDF3; }
+.contact-form-card h2 { font-size: 26px; color: var(--navy); margin-bottom: 8px; }
+.contact-form-card > p { color: var(--gray); font-size: 15px; margin-bottom: 32px; }
+.contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+.form-group.full { grid-column: 1 / -1; }
+.form-group label { font-size: 13.5px; font-weight: 600; color: var(--navy); }
+.form-group label span { color: #EF4444; }
+.form-group input, .form-group select, .form-group textarea { padding: 14px 18px; border-radius: 12px; border: 2px solid #E8EDF3; background: #fff; color: var(--text); font-family: inherit; font-size: 14.5px; outline: none; transition: var(--transition); }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--cyan); box-shadow: 0 0 0 4px rgba(0,212,255,0.1); }
+.form-group textarea { resize: vertical; min-height: 130px; }
+.contact-form .btn { grid-column: 1 / -1; justify-content: center; padding: 16px; font-size: 15px; }
+
+.map-section { padding: 0; }
+.map-wrapper { height: 400px; background: linear-gradient(135deg, var(--navy), #0d3055); display: flex; align-items: center; justify-content: center; color: var(--cyan); font-size: 80px; position: relative; overflow: hidden; }
+.map-wrapper::before { content: ''; position: absolute; top: -50%; right: -30%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(0,212,255,0.15) 0%, transparent 70%); border-radius: 50%; }
+.map-overlay-text { position: absolute; bottom: 40px; left: 40px; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 20px 24px; border-radius: 16px; color: var(--navy); z-index: 2; }
+.map-overlay-text h4 { font-size: 16px; margin-bottom: 4px; }
+.map-overlay-text p { font-size: 13px; color: var(--gray); }
+
+footer { background: var(--navy-dark); color: rgba(255,255,255,0.7); padding: 72px 0 32px; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 48px; margin-bottom: 48px; }
+.footer-brand .logo { margin-bottom: 20px; }
+.footer-brand p { font-size: 14px; margin-bottom: 24px; max-width: 300px; }
+.social-links { display: flex; gap: 12px; }
+.social-links a { width: 40px; height: 40px; background: rgba(255,255,255,0.08); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.8); transition: var(--transition); }
+.social-links a:hover { background: var(--cyan); color: var(--navy); }
+.footer-col h4 { color: #fff; font-size: 16px; margin-bottom: 24px; }
+.footer-col ul li { margin-bottom: 12px; }
+.footer-col ul li a { font-size: 14px; transition: var(--transition); }
+.footer-col ul li a:hover { color: var(--cyan); }
+.footer-bottom { padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; font-size: 13px; flex-wrap: wrap; gap: 12px; }
+
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s, transform 0.7s; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 992px) { .contact-grid { grid-template-columns: 1fr; gap: 40px; } .contact-form { grid-template-columns: 1fr; } .contact-form-card { padding: 32px 24px; } }
+@media (max-width: 768px) { section { padding: 60px 0; } .footer-grid { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container nav-wrap">
+    <a href="index.html" class="logo"><div class="logo-icon"><i class="fas fa-wifi"></i></div>Indo<span>tel</span></a>
+    <ul class="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#paket">Paket</a></li>
+      <li><a href="index.html#coverage">Coverage</a></li>
+      <li><a href="about.html">Tentang</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="kontak.html" class="active">Kontak</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="login.html" class="btn btn-outline">Masuk</a>
+      <a href="login.html?tab=register" class="btn btn-primary">Daftar</a>
+      <button class="hamburger"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</nav>
+
+<section class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Home</a><i class="fas fa-chevron-right"></i><span>Kontak</span></div>
+    <h1>Hubungi Kami</h1>
+    <p>Tim Indotel siap membantu Anda 24/7. Hubungi kami melalui telepon, WhatsApp, atau form di bawah ini.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container contact-grid">
+    <div class="contact-info">
+      <div class="contact-card reveal">
+        <div class="contact-card-icon"><i class="fas fa-phone-alt"></i></div>
+        <h3>Telepon</h3>
+        <p>Senin - Minggu, 24 jam</p>
+        <a href="tel:+622112345678">(021) 1234-5678</a>
+      </div>
+      <div class="contact-card reveal">
+        <div class="contact-card-icon"><i class="fab fa-whatsapp"></i></div>
+        <h3>WhatsApp</h3>
+        <p>Respon cepat dalam 5 menit</p>
+        <a href="https://wa.me/6281234567890" target="_blank">+62 812-3456-7890</a>
+      </div>
+      <div class="contact-card reveal">
+        <div class="contact-card-icon"><i class="fas fa-envelope"></i></div>
+        <h3>Email</h3>
+        <p>Untuk pertanyaan & kerja sama</p>
+        <a href="mailto:info@indotel.id">info@indotel.id</a>
+      </div>
+      <div class="contact-card reveal">
+        <div class="contact-card-icon"><i class="fas fa-map-marker-alt"></i></div>
+        <h3>Kantor Pusat</h3>
+        <p>Jl. Teknologi Digital No. 88<br>Jakarta Selatan, DKI Jakarta 12190</p>
+      </div>
+    </div>
+
+    <div class="contact-form-card reveal">
+      <h2>Kirim Pesan</h2>
+      <p>Isi form di bawah ini dan tim kami akan menghubungi Anda dalam 1x24 jam.</p>
+      <form class="contact-form" onsubmit="event.preventDefault(); alert('Terima kasih! Pesan Anda sudah terkirim. Tim Indotel akan segera menghubungi Anda.'); this.reset();">
+        <div class="form-group">
+          <label>Nama Lengkap <span>*</span></label>
+          <input type="text" placeholder="Nama Anda" required>
+        </div>
+        <div class="form-group">
+          <label>Nomor WhatsApp <span>*</span></label>
+          <input type="tel" placeholder="08xx-xxxx-xxxx" required>
+        </div>
+        <div class="form-group full">
+          <label>Email</label>
+          <input type="email" placeholder="email@contoh.com">
+        </div>
+        <div class="form-group full">
+          <label>Topik <span>*</span></label>
+          <select required>
+            <option value="">Pilih topik...</option>
+            <option>Berlangganan Baru</option>
+            <option>Upgrade Paket</option>
+            <option>Keluhan Teknis</option>
+            <option>Tagihan & Pembayaran</option>
+            <option>Kerja Sama Bisnis</option>
+            <option>Lainnya</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label>Pesan <span>*</span></label>
+          <textarea placeholder="Tuliskan pesan Anda di sini..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Kirim Pesan</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="map-section">
+  <div class="map-wrapper">
+    <i class="fas fa-map-marked-alt"></i>
+    <div class="map-overlay-text">
+      <h4><i class="fas fa-map-marker-alt" style="color:#00A8CC;"></i> Kantor Pusat Indotel</h4>
+      <p>Jl. Teknologi Digital No. 88, Jakarta Selatan</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo"><div class="logo-icon"><i class="fas fa-wifi"></i></div>Indo<span>tel</span></div>
+        <p>Penyedia layanan internet fiber optik terpercaya di Indonesia.</p>
+        <div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div>
+      </div>
+      <div class="footer-col"><h4>Perusahaan</h4><ul><li><a href="about.html">Tentang Kami</a></li><li><a href="#">Karir</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+      <div class="footer-col"><h4>Layanan</h4><ul><li><a href="index.html#paket">Internet Home</a></li><li><a href="index.html#paket">Internet Bisnis</a></li><li><a href="#">IPTV</a></li></ul></div>
+      <div class="footer-col"><h4>Kontak</h4><ul><li><a href="tel:+622112345678"><i class="fas fa-phone"></i> (021) 1234-5678</a></li><li><a href="mailto:info@indotel.id"><i class="fas fa-envelope"></i> info@indotel.id</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2025 PT Indotel Network Indonesia. All rights reserved.</p><div><a href="#">Privacy</a> · <a href="#">Terms</a></div></div>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('active'); observer.unobserve(entry.target); } }); }, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
