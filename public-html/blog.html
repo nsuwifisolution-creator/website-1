@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog - Indotel</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --navy: #0A2540; --navy-dark: #061829; --cyan: #00D4FF; --cyan-dark: #00A8CC; --gray-light: #F5F7FA; --gray: #6B7A8F; --text: #1A2B42; --shadow: 0 10px 40px rgba(10,37,64,0.08); --shadow-lg: 0 20px 60px rgba(10,37,64,0.15); --transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
+body { font-family: 'Poppins', sans-serif; color: var(--text); line-height: 1.6; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 50px; font-weight: 600; font-size: 15px; cursor: pointer; border: none; transition: var(--transition); font-family: inherit; }
+.btn-primary { background: linear-gradient(135deg, var(--cyan), var(--cyan-dark)); color: var(--navy); box-shadow: 0 8px 24px rgba(0,212,255,0.35); }
+.btn-primary:hover { transform: translateY(-3px); }
+.btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.3); }
+.btn-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--cyan); color: var(--cyan); }
+
+.navbar { position: fixed; top: 0; left: 0; width: 100%; padding: 18px 0; z-index: 1000; background: rgba(10,37,64,0.95); backdrop-filter: blur(20px); }
+.nav-wrap { display: flex; justify-content: space-between; align-items: center; }
+.logo { display: flex; align-items: center; gap: 10px; font-size: 24px; font-weight: 800; color: #fff; }
+.logo-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--cyan), var(--cyan-dark)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--navy); font-size: 20px; }
+.logo span { color: var(--cyan); }
+.nav-menu { display: flex; gap: 32px; align-items: center; }
+.nav-menu a { color: rgba(255,255,255,0.85); font-weight: 500; font-size: 15px; transition: var(--transition); }
+.nav-menu a:hover, .nav-menu a.active { color: var(--cyan); }
+.nav-cta { display: flex; gap: 12px; align-items: center; }
+.hamburger { display: none; background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; }
+@media (max-width: 768px) { .nav-menu { display: none; } .hamburger { display: block; } }
+
+.page-header { background: linear-gradient(135deg, var(--navy-dark), var(--navy) 50%, #0d3055); padding: 160px 0 80px; text-align: center; color: #fff; position: relative; overflow: hidden; }
+.page-header::before { content: ''; position: absolute; top: -50%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(0,212,255,0.15) 0%, transparent 70%); border-radius: 50%; }
+.page-header h1 { font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 800; margin-bottom: 16px; position: relative; z-index: 2; }
+.page-header p { color: rgba(255,255,255,0.75); font-size: 17px; max-width: 640px; margin: 0 auto; position: relative; z-index: 2; }
+.breadcrumb { display: inline-flex; align-items: center; gap: 10px; background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); padding: 8px 18px; border-radius: 50px; font-size: 13px; color: var(--cyan); margin-bottom: 20px; position: relative; z-index: 2; }
+.breadcrumb a { color: rgba(255,255,255,0.7); }
+.breadcrumb a:hover { color: var(--cyan); }
+
+section { padding: 80px 0; }
+.section-tag { display: inline-block; color: var(--cyan-dark); background: rgba(0,212,255,0.1); padding: 6px 18px; border-radius: 50px; font-size: 13px; font-weight: 600; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
+
+.blog-featured { display: grid; grid-template-columns: 1.3fr 1fr; background: #fff; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-lg); margin-bottom: 64px; }
+.blog-featured-image { background: linear-gradient(135deg, var(--navy), #0d3055); min-height: 400px; display: flex; align-items: center; justify-content: center; color: var(--cyan); font-size: 100px; position: relative; overflow: hidden; }
+.blog-featured-image::before { content: ''; position: absolute; top: -50%; right: -30%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(0,212,255,0.2) 0%, transparent 70%); border-radius: 50%; }
+.blog-featured-content { padding: 48px; display: flex; flex-direction: column; justify-content: center; }
+.blog-featured-content h2 { font-size: 28px; color: var(--navy); font-weight: 700; line-height: 1.3; margin-bottom: 16px; letter-spacing: -0.5px; }
+.blog-featured-content p { color: var(--gray); font-size: 15px; line-height: 1.7; margin-bottom: 24px; }
+.blog-category { display: inline-block; background: rgba(0,212,255,0.1); color: var(--cyan-dark); padding: 6px 16px; border-radius: 50px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; width: fit-content; }
+.blog-meta { display: flex; gap: 20px; color: var(--gray); font-size: 13px; margin-bottom: 24px; flex-wrap: wrap; }
+.blog-meta span { display: flex; align-items: center; gap: 6px; }
+.blog-meta i { color: var(--cyan-dark); }
+
+.blog-filters { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; }
+.filter-btn { padding: 10px 22px; border-radius: 50px; border: 2px solid #E8EDF3; background: #fff; color: var(--gray); font-family: inherit; font-size: 14px; font-weight: 500; cursor: pointer; transition: var(--transition); }
+.filter-btn:hover, .filter-btn.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+.blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
+.blog-card { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); transition: var(--transition); border: 1px solid transparent; display: flex; flex-direction: column; }
+.blog-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: rgba(0,212,255,0.2); }
+.blog-card-image { height: 200px; background: linear-gradient(135deg, var(--navy), #0d3055); display: flex; align-items: center; justify-content: center; color: var(--cyan); font-size: 56px; position: relative; overflow: hidden; }
+.blog-card-image::before { content: ''; position: absolute; top: -50%; right: -30%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(0,212,255,0.2) 0%, transparent 70%); border-radius: 50%; }
+.blog-card-content { padding: 28px; flex: 1; display: flex; flex-direction: column; }
+.blog-card-content h3 { font-size: 19px; color: var(--navy); font-weight: 700; line-height: 1.35; margin-bottom: 12px; }
+.blog-card-content p { color: var(--gray); font-size: 14px; line-height: 1.7; margin-bottom: 20px; flex: 1; }
+.blog-read-more { display: inline-flex; align-items: center; gap: 8px; color: var(--cyan-dark); font-weight: 600; font-size: 14px; transition: var(--transition); }
+.blog-read-more:hover { gap: 14px; }
+
+.blog-pagination { display: flex; justify-content: center; gap: 8px; margin-top: 64px; }
+.blog-pagination a { width: 44px; height: 44px; border-radius: 12px; background: #fff; border: 2px solid #E8EDF3; display: flex; align-items: center; justify-content: center; color: var(--gray); font-weight: 600; font-size: 14px; transition: var(--transition); }
+.blog-pagination a:hover, .blog-pagination a.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+footer { background: var(--navy-dark); color: rgba(255,255,255,0.7); padding: 72px 0 32px; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 48px; margin-bottom: 48px; }
+.footer-brand .logo { margin-bottom: 20px; }
+.footer-brand p { font-size: 14px; margin-bottom: 24px; max-width: 300px; }
+.social-links { display: flex; gap: 12px; }
+.social-links a { width: 40px; height: 40px; background: rgba(255,255,255,0.08); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.8); transition: var(--transition); }
+.social-links a:hover { background: var(--cyan); color: var(--navy); }
+.footer-col h4 { color: #fff; font-size: 16px; margin-bottom: 24px; }
+.footer-col ul li { margin-bottom: 12px; }
+.footer-col ul li a { font-size: 14px; transition: var(--transition); }
+.footer-col ul li a:hover { color: var(--cyan); }
+.footer-bottom { padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; font-size: 13px; flex-wrap: wrap; gap: 12px; }
+
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s, transform 0.7s; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) {
+  section { padding: 60px 0; }
+  .blog-featured { grid-template-columns: 1fr; }
+  .blog-featured-content { padding: 32px; }
+  .blog-featured-content h2 { font-size: 22px; }
+  .blog-featured-image { min-height: 240px; font-size: 70px; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container nav-wrap">
+    <a href="index.html" class="logo"><div class="logo-icon"><i class="fas fa-wifi"></i></div>Indo<span>tel</span></a>
+    <ul class="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#paket">Paket</a></li>
+      <li><a href="index.html#coverage">Coverage</a></li>
+      <li><a href="about.html">Tentang</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+      <li><a href="kontak.html">Kontak</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="login.html" class="btn btn-outline">Masuk</a>
+      <a href="login.html?tab=register" class="btn btn-primary">Daftar</a>
+      <button class="hamburger"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</nav>
+
+<section class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Home</a><i class="fas fa-chevron-right"></i><span>Blog</span></div>
+    <h1>Blog Indotel</h1>
+    <p>Tips, tutorial, dan berita terbaru seputar teknologi internet.</p>
+  </div>
+</section>
+
+<section style="background:#fff;">
+  <div class="container">
+    <article class="blog-featured reveal">
+      <div class="blog-featured-image"><i class="fas fa-rocket"></i></div>
+      <div class="blog-featured-content">
+        <span class="blog-category">Featured</span>
+        <h2>Panduan Lengkap Memilih Paket Internet untuk WFH di Tahun 2025</h2>
+        <p>Bekerja dari rumah membutuhkan koneksi internet yang stabil dan cepat. Simak panduan lengkap memilih paket internet yang tepat untuk kebutuhan WFH Anda.</p>
+        <div class="blog-meta">
+          <span><i class="fas fa-user"></i> Budi Santoso</span>
+          <span><i class="fas fa-calendar"></i> 10 Jan 2025</span>
+          <span><i class="fas fa-clock"></i> 8 menit baca</span>
+        </div>
+        <a href="#" class="btn btn-primary" style="width:fit-content;">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </article>
+
+    <div class="blog-filters reveal">
+      <button class="filter-btn active">Semua</button>
+      <button class="filter-btn">Tips & Tutorial</button>
+      <button class="filter-btn">Berita Teknologi</button>
+      <button class="filter-btn">Promo</button>
+      <button class="filter-btn">Review</button>
+    </div>
+
+    <div class="blog-grid">
+      <article class="blog-card reveal">
+        <div class="blog-card-image"><i class="fas fa-wifi"></i></div>
+        <div class="blog-card-content">
+          <span class="blog-category">Tips & Tutorial</span>
+          <h3>5 Cara Meningkatkan Kecepatan WiFi di Rumah</h3>
+          <p>WiFi lambat? Coba 5 tips mudah ini untuk meningkatkan kecepatan internet di rumah Anda tanpa ganti paket.</p>
+          <div class="blog-meta"><span><i class="fas fa-calendar"></i> 8 Jan 2025</span><span><i class="fas fa-clock"></i> 5 menit</span></div>
+          <a href="#" class="blog-read-more">Baca <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </article>
+      <article class="blog-card reveal">
+        <div class="blog-card-image"><i class="fas fa-shield-alt"></i></div>
+        <div class="blog-card-content">
+          <span class="blog-category">Tips & Tutorial</span>
+          <h3>Tips Keamanan WiFi: Lindungi Data Anda dari Peretas</h3>
+          <p>Pelajari cara mengamankan jaringan WiFi rumah dari serangan siber yang semakin canggih.</p>
+          <div class="blog-meta"><span><i class="fas fa-calendar"></i> 5 Jan 2025</span><span><i class="fas fa-clock"></i> 6 menit</span></div>
+          <a href="#" class="blog-read-more">Baca <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </article>
+      <article class="blog-card reveal">
+        <div class="blog-card-image"><i class="fas fa-microchip"></i></div>
+        <div class="blog-card-content">
+          <span class="blog-category">Berita Teknologi</span>
+          <h3>Teknologi WiFi 7: Apa yang Perlu Anda Ketahui?</h3>
+          <p>WiFi 7 hadir dengan kecepatan hingga 46 Gbps. Simak penjelasan lengkap dan kapan tersedia di Indonesia.</p>
+          <div class="blog-meta"><span><i class="fas fa-calendar"></i> 2 Jan 2025</span><span><i class="fas fa-clock"></i> 7 menit</span></div>
+          <a href="#" class="blog-read-more">Baca <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </article>
+      <article class="blog-card reveal">
+        <div class="blog-card-image"><i class="fas fa-gamepad"></i></div>
+        <div class="blog-card-content">
+          <span class="blog-category">Review</span>
+          <h3>Rekomendasi Paket Internet untuk Gaming Online</h3>
+          <p>Buat gamers, ini dia paket internet terbaik dengan ping rendah dan koneksi stabil untuk main game favorit.</p>
+          <div class="blog-meta"><span><i class="fas fa-calendar"></i> 28 Des 2024</span><span><i class="fas fa-clock"></i> 5 menit</span></div>
+          <a href="#" class="blog-read-more">Baca <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </article>
+      <article class="blog-card reveal">
+        <div class="blog-card-image"><i class="fas fa-tags"></i></div>
+        <div class="blog-card-content">
+          <span class="blog-category">Promo</span>
+          <h3>Promo Akhir Tahun: Diskon 50% Biaya Berlangganan!</h3>
+          <p>Dapatkan diskon spesial untuk pelanggan baru Indotel sepanjang bulan ini.</p>
+          <div class="blog-meta"><span><i class="fas fa-calendar"></i> 20 Des 2024</span><span><i class="fas fa-clock"></i> 3 menit</span></div>
+          <a href="#" class="blog-read-more">Baca <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </article>
+      <article class="blog-card reveal">
+        <div class="blog-card-image"><i class="fas fa-tv"></i></div>
+        <div class="blog-card-content">
+          <span class="blog-category">Tips & Tutorial</span>
+          <h3>Streaming 4K Tanpa Buffering: Butuh Kecepatan Berapa?</h3>
+          <p>Ingin nonton Netflix 4K lancar? Cek rekomendasi kecepatan internet minimum yang dibutuhkan.</p>
+          <div class="blog-meta"><span><i class="fas fa-calendar"></i> 15 Des 2024</span><span><i class="fas fa-clock"></i> 4 menit</span></div>
+          <a href="#" class="blog-read-more">Baca <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </article>
+    </div>
+
+    <div class="blog-pagination reveal">
+      <a href="#" class="active">1</a>
+      <a href="#">2</a>
+      <a href="#">3</a>
+      <a href="#"><i class="fas fa-chevron-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo"><div class="logo-icon"><i class="fas fa-wifi"></i></div>Indo<span>tel</span></div>
+        <p>Penyedia layanan internet fiber optik terpercaya di Indonesia.</p>
+        <div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div>
+      </div>
+      <div class="footer-col"><h4>Perusahaan</h4><ul><li><a href="about.html">Tentang Kami</a></li><li><a href="#">Karir</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+      <div class="footer-col"><h4>Layanan</h4><ul><li><a href="index.html#paket">Internet Home</a></li><li><a href="index.html#paket">Internet Bisnis</a></li><li><a href="#">IPTV</a></li></ul></div>
+      <div class="footer-col"><h4>Kontak</h4><ul><li><a href="tel:+622112345678"><i class="fas fa-phone"></i> (021) 1234-5678</a></li><li><a href="mailto:info@indotel.id"><i class="fas fa-envelope"></i> info@indotel.id</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2025 PT Indotel Network Indonesia. All rights reserved.</p><div><a href="#">Privacy</a> · <a href="#">Terms</a></div></div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('active'); observer.unobserve(entry.target); } }); }, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
