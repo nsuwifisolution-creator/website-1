@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tentang Kami - Indotel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --navy: #0A2540; --navy-dark: #061829; --cyan: #00D4FF; --cyan-dark: #00A8CC; --white: #fff; --gray-light: #F5F7FA; --gray: #6B7A8F; --text: #1A2B42; --shadow: 0 10px 40px rgba(10,37,64,0.08); --shadow-lg: 0 20px 60px rgba(10,37,64,0.15); --transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
+body { font-family: 'Poppins', sans-serif; color: var(--text); background: #fff; line-height: 1.6; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 50px; font-weight: 600; font-size: 15px; cursor: pointer; border: none; transition: var(--transition); font-family: inherit; }
+.btn-primary { background: linear-gradient(135deg, var(--cyan), var(--cyan-dark)); color: var(--navy); box-shadow: 0 8px 24px rgba(0,212,255,0.35); }
+.btn-primary:hover { transform: translateY(-3px); }
+.btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.3); }
+.btn-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--cyan); color: var(--cyan); }
+
+.navbar { position: fixed; top: 0; left: 0; width: 100%; padding: 18px 0; z-index: 1000; background: rgba(10,37,64,0.95); backdrop-filter: blur(20px); }
+.nav-wrap { display: flex; justify-content: space-between; align-items: center; }
+.logo { display: flex; align-items: center; gap: 10px; font-size: 24px; font-weight: 800; color: #fff; }
+.logo-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--cyan), var(--cyan-dark)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--navy); font-size: 20px; }
+.logo span { color: var(--cyan); }
+.nav-menu { display: flex; gap: 32px; align-items: center; }
+.nav-menu a { color: rgba(255,255,255,0.85); font-weight: 500; font-size: 15px; transition: var(--transition); }
+.nav-menu a:hover, .nav-menu a.active { color: var(--cyan); }
+.nav-cta { display: flex; gap: 12px; align-items: center; }
+.hamburger { display: none; background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; }
+@media (max-width: 768px) { .nav-menu { display: none; } .hamburger { display: block; } }
+
+.page-header { background: linear-gradient(135deg, var(--navy-dark), var(--navy) 50%, #0d3055); padding: 160px 0 80px; text-align: center; color: #fff; position: relative; overflow: hidden; }
+.page-header::before { content: ''; position: absolute; top: -50%; right: -20%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(0,212,255,0.15) 0%, transparent 70%); border-radius: 50%; }
+.breadcrumb { display: inline-flex; align-items: center; gap: 10px; background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); padding: 8px 18px; border-radius: 50px; font-size: 13px; color: var(--cyan); margin-bottom: 20px; position: relative; z-index: 2; }
+.breadcrumb a { color: rgba(255,255,255,0.7); }
+.breadcrumb a:hover { color: var(--cyan); }
+.page-header h1 { font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 800; margin-bottom: 16px; position: relative; z-index: 2; }
+.page-header p { color: rgba(255,255,255,0.75); font-size: 17px; max-width: 640px; margin: 0 auto; position: relative; z-index: 2; }
+
+section { padding: 100px 0; }
+.section-header { text-align: center; max-width: 700px; margin: 0 auto 64px; }
+.section-tag { display: inline-block; color: var(--cyan-dark); background: rgba(0,212,255,0.1); padding: 6px 18px; border-radius: 50px; font-size: 13px; font-weight: 600; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
+.section-header h2 { font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 700; color: var(--navy); margin-bottom: 16px; letter-spacing: -0.5px; }
+.section-header p { color: var(--gray); }
+
+.story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.story-content h2 { font-size: 32px; color: var(--navy); margin-bottom: 20px; }
+.story-content p { color: var(--gray); margin-bottom: 16px; line-height: 1.8; }
+.story-visual { background: linear-gradient(135deg, var(--navy), #0d3055); border-radius: 24px; padding: 48px; color: #fff; min-height: 400px; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
+.story-visual::before { content: ''; position: absolute; top: -50%; right: -30%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(0,212,255,0.2) 0%, transparent 70%); border-radius: 50%; }
+.story-visual-icon { width: 80px; height: 80px; background: rgba(0,212,255,0.15); border: 1px solid rgba(0,212,255,0.3); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 36px; color: var(--cyan); margin-bottom: 24px; position: relative; z-index: 2; }
+.story-visual h3 { font-size: 24px; margin-bottom: 12px; position: relative; z-index: 2; }
+.story-visual p { color: rgba(255,255,255,0.75); position: relative; z-index: 2; }
+
+.stats-section { background: var(--gray-light); }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+.stat-card { background: #fff; padding: 36px 24px; border-radius: 16px; text-align: center; box-shadow: var(--shadow); transition: var(--transition); }
+.stat-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+.stat-card i { font-size: 32px; color: var(--cyan-dark); margin-bottom: 16px; }
+.stat-card h3 { font-size: 36px; font-weight: 800; color: var(--navy); letter-spacing: -1px; margin-bottom: 6px; }
+.stat-card p { color: var(--gray); font-size: 14px; }
+
+.vm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.vm-card { background: #fff; border: 2px solid #E8EDF3; border-radius: 24px; padding: 44px 36px; transition: var(--transition); }
+.vm-card:hover { border-color: var(--cyan); transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.vm-icon { width: 64px; height: 64px; background: linear-gradient(135deg, var(--cyan), var(--cyan-dark)); border-radius: 18px; display: flex; align-items: center; justify-content: center; color: var(--navy); font-size: 26px; margin-bottom: 24px; }
+.vm-card h3 { font-size: 22px; color: var(--navy); margin-bottom: 16px; }
+.vm-card p, .vm-card ul li { color: var(--gray); line-height: 1.8; }
+.vm-card ul li { display: flex; gap: 12px; padding: 6px 0; }
+.vm-card ul li i { color: var(--cyan-dark); margin-top: 5px; }
+
+.values { background: var(--gray-light); }
+.values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px; }
+.value-card { background: #fff; padding: 36px 28px; border-radius: 16px; transition: var(--transition); }
+.value-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+.value-icon { width: 60px; height: 60px; background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(0,212,255,0.05)); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: var(--cyan-dark); font-size: 24px; margin-bottom: 20px; }
+.value-card h3 { font-size: 18px; color: var(--navy); margin-bottom: 10px; }
+.value-card p { color: var(--gray); font-size: 14px; line-height: 1.7; }
+
+.team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; }
+.team-card { background: #fff; border-radius: 16px; padding: 32px 24px; text-align: center; box-shadow: var(--shadow); transition: var(--transition); }
+.team-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+.team-avatar { width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), var(--cyan-dark)); display: flex; align-items: center; justify-content: center; color: var(--navy); font-size: 32px; font-weight: 800; margin: 0 auto 20px; }
+.team-card h3 { font-size: 17px; color: var(--navy); margin-bottom: 4px; }
+.team-card p { color: var(--gray); font-size: 13.5px; }
+
+.cta-section { background: linear-gradient(135deg, var(--navy-dark), var(--navy)); color: #fff; text-align: center; }
+.cta-content h2 { font-size: clamp(1.75rem, 3.5vw, 2.5rem); margin-bottom: 16px; }
+.cta-content p { color: rgba(255,255,255,0.75); margin-bottom: 32px; }
+.cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+footer { background: var(--navy-dark); color: rgba(255,255,255,0.7); padding: 72px 0 32px; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 48px; margin-bottom: 48px; }
+.footer-brand .logo { margin-bottom: 20px; }
+.footer-brand p { font-size: 14px; margin-bottom: 24px; max-width: 300px; }
+.social-links { display: flex; gap: 12px; }
+.social-links a { width: 40px; height: 40px; background: rgba(255,255,255,0.08); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.8); transition: var(--transition); }
+.social-links a:hover { background: var(--cyan); color: var(--navy); transform: translateY(-3px); }
+.footer-col h4 { color: #fff; font-size: 16px; margin-bottom: 24px; }
+.footer-col ul li { margin-bottom: 12px; }
+.footer-col ul li a { font-size: 14px; transition: var(--transition); }
+.footer-col ul li a:hover { color: var(--cyan); }
+.footer-bottom { padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; font-size: 13px; flex-wrap: wrap; gap: 12px; }
+
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s, transform 0.7s; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 992px) { .story-grid, .vm-grid { grid-template-columns: 1fr; gap: 40px; } .footer-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 768px) { section { padding: 72px 0; } .footer-grid { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; text-align: center; } .page-header { padding: 120px 0 60px; } }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container nav-wrap">
+    <a href="index.html" class="logo"><div class="logo-icon"><i class="fas fa-wifi"></i></div>Indo<span>tel</span></a>
+    <ul class="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#paket">Paket</a></li>
+      <li><a href="index.html#coverage">Coverage</a></li>
+      <li><a href="about.html" class="active">Tentang</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="kontak.html">Kontak</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="login.html" class="btn btn-outline">Masuk</a>
+      <a href="login.html?tab=register" class="btn btn-primary">Daftar</a>
+      <button class="hamburger"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</nav>
+
+<section class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Home</a><i class="fas fa-chevron-right"></i><span>Tentang Kami</span></div>
+    <h1>Tentang Indotel</h1>
+    <p>Membangun koneksi yang menghubungkan Indonesia dengan dunia digital sejak 2015.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container story-grid">
+    <div class="story-content reveal">
+      <span class="section-tag">Cerita Kami</span>
+      <h2>Lebih dari Sekadar Penyedia Internet</h2>
+      <p>Indotel didirikan pada tahun 2015 dengan visi sederhana: menghadirkan internet cepat, stabil, dan terjangkau untuk seluruh masyarakat Indonesia. Berawal dari kota kecil, kini kami telah menjangkau lebih dari 25 kota besar di seluruh nusantara.</p>
+      <p>Kami percaya bahwa koneksi internet yang handal bukan lagi kemewahan, melainkan kebutuhan dasar. Itulah mengapa kami terus berinvestasi pada teknologi fiber optik terkini dan infrastruktur jaringan yang handal.</p>
+      <p>Dengan lebih dari 50.000 pelanggan aktif dan tim profesional yang berdedikasi, Indotel terus berkomitmen menjadi mitra digital terpercaya.</p>
+    </div>
+    <div class="story-visual reveal">
+      <div class="story-visual-icon"><i class="fas fa-rocket"></i></div>
+      <h3>Misi Kami Sederhana</h3>
+      <p>Menghubungkan setiap rumah dan bisnis di Indonesia dengan internet berkualitas dunia, dengan harga yang ramah di kantong.</p>
+    </div>
+  </div>
+</section>
+
+<section class="stats-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Pencapaian</span>
+      <h2>Indotel dalam Angka</h2>
+      <p>Angka-angka yang membuktikan komitmen kami untuk terus berkembang.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card reveal"><i class="fas fa-users"></i><h3>50K+</h3><p>Pelanggan Aktif</p></div>
+      <div class="stat-card reveal"><i class="fas fa-city"></i><h3>25+</h3><p>Kota Terjangkau</p></div>
+      <div class="stat-card reveal"><i class="fas fa-calendar-alt"></i><h3>10+</h3><p>Tahun Pengalaman</p></div>
+      <div class="stat-card reveal"><i class="fas fa-user-tie"></i><h3>500+</h3><p>Karyawan Profesional</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Visi & Misi</span>
+      <h2>Arah & Tujuan Kami</h2>
+      <p>Nilai-nilai yang menjadi fondasi setiap langkah Indotel.</p>
+    </div>
+    <div class="vm-grid">
+      <div class="vm-card reveal">
+        <div class="vm-icon"><i class="fas fa-eye"></i></div>
+        <h3>Visi</h3>
+        <p>Menjadi penyedia layanan internet fiber optik terdepan di Indonesia yang menghubungkan seluruh lapisan masyarakat dengan dunia digital tanpa batas.</p>
+      </div>
+      <div class="vm-card reveal">
+        <div class="vm-icon"><i class="fas fa-bullseye"></i></div>
+        <h3>Misi</h3>
+        <ul>
+          <li><i class="fas fa-check-circle"></i> Menyediakan internet cepat, stabil, dan terjangkau untuk semua</li>
+          <li><i class="fas fa-check-circle"></i> Memberikan pelayanan pelanggan terbaik 24/7</li>
+          <li><i class="fas fa-check-circle"></i> Berinvestasi pada teknologi fiber optik terkini</li>
+          <li><i class="fas fa-check-circle"></i> Berkontribusi pada pemerataan digital Indonesia</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="values">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Nilai Perusahaan</span>
+      <h2>Yang Kami Pegang Teguh</h2>
+      <p>Empat nilai inti yang memandu setiap keputusan dan tindakan kami.</p>
+    </div>
+    <div class="values-grid">
+      <div class="value-card reveal"><div class="value-icon"><i class="fas fa-handshake"></i></div><h3>Integritas</h3><p>Kami jujur dan transparan dalam setiap transaksi dan komunikasi dengan pelanggan.</p></div>
+      <div class="value-card reveal"><div class="value-icon"><i class="fas fa-lightbulb"></i></div><h3>Inovasi</h3><p>Terus berinovasi menghadirkan teknologi terbaru untuk pengalaman terbaik pelanggan.</p></div>
+      <div class="value-card reveal"><div class="value-icon"><i class="fas fa-heart"></i></div><h3>Pelanggan Utama</h3><p>Kepuasan pelanggan adalah prioritas tertinggi dalam setiap layanan kami.</p></div>
+      <div class="value-card reveal"><div class="value-icon"><i class="fas fa-users-cog"></i></div><h3>Kolaborasi</h3><p>Kami percaya bahwa kerja sama tim yang solid menghasilkan layanan terbaik.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Tim Manajemen</span>
+      <h2>Orang-Orang di Balik Indotel</h2>
+      <p>Tim profesional yang berdedikasi membangun koneksi Indonesia.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal"><div class="team-avatar">BS</div><h3>Budi Santoso</h3><p>Chief Executive Officer</p></div>
+      <div class="team-card reveal"><div class="team-avatar">SR</div><h3>Siti Rahmawati</h3><p>Chief Technology Officer</p></div>
+      <div class="team-card reveal"><div class="team-avatar">AW</div><h3>Agus Wijaya</h3><p>Chief Operating Officer</p></div>
+      <div class="team-card reveal"><div class="team-avatar">DP</div><h3>Dewi Pratiwi</h3><p>Chief Marketing Officer</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-content reveal">
+      <h2>Siap Bergabung dengan Indotel?</h2>
+      <p>Rasakan pengalaman internet cepat, stabil, dan unlimited bersama kami.</p>
+      <div class="cta-buttons">
+        <a href="index.html#paket" class="btn btn-primary"><i class="fas fa-tags"></i> Lihat Paket</a>
+        <a href="kontak.html" class="btn btn-outline"><i class="fas fa-headset"></i> Hubungi Kami</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo"><div class="logo-icon"><i class="fas fa-wifi"></i></div>Indo<span>tel</span></div>
+        <p>Penyedia layanan internet fiber optik terpercaya di Indonesia.</p>
+        <div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div>
+      </div>
+      <div class="footer-col"><h4>Perusahaan</h4><ul><li><a href="about.html">Tentang Kami</a></li><li><a href="#">Karir</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+      <div class="footer-col"><h4>Layanan</h4><ul><li><a href="index.html#paket">Internet Home</a></li><li><a href="index.html#paket">Internet Bisnis</a></li><li><a href="#">IPTV</a></li></ul></div>
+      <div class="footer-col"><h4>Kontak</h4><ul><li><a href="tel:+622112345678"><i class="fas fa-phone"></i> (021) 1234-5678</a></li><li><a href="mailto:info@indotel.id"><i class="fas fa-envelope"></i> info@indotel.id</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2025 PT Indotel Network Indonesia. All rights reserved.</p><div><a href="#">Privacy</a> · <a href="#">Terms</a></div></div>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('active'); observer.unobserve(entry.target); } }); }, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
