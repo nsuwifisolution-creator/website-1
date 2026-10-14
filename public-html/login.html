@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masuk / Daftar - Indotel</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --navy: #0A2540; --navy-dark: #061829; --cyan: #00D4FF; --cyan-dark: #00A8CC; --white: #fff; --gray-light: #F5F7FA; --gray: #6B7A8F; --text: #1A2B42; --transition: all 0.3s cubic-bezier(0.4,0,0.2,1); --danger: #EF4444; --success: #10B981; }
+body { font-family: 'Poppins', sans-serif; color: var(--text); line-height: 1.6; min-height: 100vh; background: linear-gradient(135deg, var(--navy-dark), var(--navy) 50%, #0d3055); display: flex; align-items: center; justify-content: center; padding: 24px; }
+body::before { content: ''; position: fixed; top: -50%; right: -20%; width: 800px; height: 800px; background: radial-gradient(circle, rgba(0,212,255,0.15) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+a { text-decoration: none; color: inherit; }
+
+.auth-wrapper { width: 100%; max-width: 1000px; background: #fff; border-radius: 28px; box-shadow: 0 30px 80px rgba(0,0,0,0.3); overflow: hidden; display: grid; grid-template-columns: 1fr 1.2fr; min-height: 640px; position: relative; z-index: 2; }
+
+.auth-brand { background: linear-gradient(135deg, var(--navy-dark), var(--navy)); padding: 48px 40px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
+.auth-brand::before { content: ''; position: absolute; top: -30%; right: -30%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(0,212,255,0.2) 0%, transparent 70%); border-radius: 50%; }
+.auth-logo { display: flex; align-items: center; gap: 10px; font-size: 26px; font-weight: 800; color: #fff; position: relative; z-index: 2; }
+.auth-logo-icon { width: 44px; height: 44px; background: linear-gradient(135deg, var(--cyan), var(--cyan-dark)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--navy); font-size: 22px; }
+.auth-logo span { color: var(--cyan); }
+.auth-brand-content { position: relative; z-index: 2; padding: 32px 0; }
+.auth-brand-content h2 { font-size: 30px; font-weight: 700; line-height: 1.25; margin-bottom: 16px; }
+.auth-brand-content h2 span { background: linear-gradient(135deg, var(--cyan), #7FE7FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.auth-brand-content p { color: rgba(255,255,255,0.75); font-size: 15px; margin-bottom: 32px; line-height: 1.7; }
+.auth-features { display: flex; flex-direction: column; gap: 16px; }
+.auth-feature { display: flex; align-items: center; gap: 14px; font-size: 14.5px; }
+.auth-feature i { width: 36px; height: 36px; background: rgba(0,212,255,0.15); border: 1px solid rgba(0,212,255,0.3); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--cyan); font-size: 15px; flex-shrink: 0; }
+
+.auth-form-side { padding: 48px 56px; display: flex; flex-direction: column; justify-content: center; }
+.back-home { display: inline-flex; align-items: center; gap: 8px; color: var(--gray); font-size: 14px; font-weight: 500; margin-bottom: 24px; transition: var(--transition); width: fit-content; }
+.back-home:hover { color: var(--cyan-dark); gap: 12px; }
+.auth-title { margin-bottom: 32px; }
+.auth-title h1 { font-size: 28px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.auth-title p { color: var(--gray); font-size: 14.5px; }
+
+.auth-tabs { display: flex; background: var(--gray-light); border-radius: 14px; padding: 5px; margin-bottom: 28px; }
+.auth-tab { flex: 1; padding: 12px; text-align: center; font-size: 14.5px; font-weight: 600; color: var(--gray); cursor: pointer; border-radius: 10px; transition: var(--transition); border: none; background: transparent; font-family: inherit; }
+.auth-tab.active { background: #fff; color: var(--navy); box-shadow: 0 2px 8px rgba(10,37,64,0.08); }
+
+.auth-form { display: none; animation: fadeIn 0.4s; }
+.auth-form.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.form-group { margin-bottom: 18px; }
+.form-group label { display: block; font-size: 13.5px; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
+.form-group label span { color: var(--danger); }
+.input-wrapper { position: relative; }
+.input-wrapper input { width: 100%; padding: 14px 18px 14px 48px; border-radius: 12px; border: 2px solid #E8EDF3; background: #fff; color: var(--text); font-family: inherit; font-size: 14.5px; outline: none; transition: var(--transition); }
+.input-wrapper input:focus { border-color: var(--cyan); box-shadow: 0 0 0 4px rgba(0,212,255,0.1); }
+.input-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--gray); font-size: 15px; pointer-events: none; }
+.input-wrapper.has-toggle input { padding-right: 48px; }
+.toggle-password { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--gray); cursor: pointer; font-size: 15px; padding: 4px; }
+.toggle-password:hover { color: var(--cyan-dark); }
+
+.form-options { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; font-size: 13.5px; }
+.checkbox-wrapper { display: flex; align-items: center; gap: 8px; cursor: pointer; color: var(--gray); }
+.checkbox-wrapper input { width: 16px; height: 16px; accent-color: var(--cyan-dark); cursor: pointer; }
+.forgot-link { color: var(--cyan-dark); font-weight: 600; }
+
+.btn-submit { width: 100%; padding: 15px; border-radius: 12px; border: none; background: linear-gradient(135deg, var(--cyan), var(--cyan-dark)); color: var(--navy); font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer; transition: var(--transition); box-shadow: 0 8px 24px rgba(0,212,255,0.35); display: flex; align-items: center; justify-content: center; gap: 8px; }
+.btn-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,212,255,0.5); }
+
+.terms-text { font-size: 12.5px; color: var(--gray); margin-bottom: 20px; line-height: 1.6; }
+.terms-text a { color: var(--cyan-dark); font-weight: 600; }
+
+.alert { padding: 12px 16px; border-radius: 10px; font-size: 13.5px; margin-bottom: 20px; display: none; align-items: center; gap: 10px; }
+.alert.show { display: flex; }
+.alert.error { background: rgba(239,68,68,0.1); color: var(--danger); border: 1px solid rgba(239,68,68,0.2); }
+.alert.success { background: rgba(16,185,129,0.1); color: var(--success); border: 1px solid rgba(16,185,129,0.2); }
+
+@media (max-width: 900px) { .auth-wrapper { grid-template-columns: 1fr; max-width: 480px; } .auth-brand { padding: 32px 28px; } .auth-features { display: none; } .auth-form-side { padding: 36px 28px; } }
+</style>
+</head>
+<body>
+
+<div class="auth-wrapper">
+  <div class="auth-brand">
+    <a href="index.html" class="auth-logo">
+      <div class="auth-logo-icon"><i class="fas fa-wifi"></i></div>
+      Indo<span>tel</span>
+    </a>
+    <div class="auth-brand-content">
+      <h2>Selamat Datang di <span>Indotel</span></h2>
+      <p>Masuk ke akun Anda untuk mengelola layanan internet, tagihan, dan paket berlangganan.</p>
+      <div class="auth-features">
+        <div class="auth-feature"><i class="fas fa-tachometer-alt"></i><span>Cek kecepatan & status koneksi</span></div>
+        <div class="auth-feature"><i class="fas fa-file-invoice-dollar"></i><span>Kelola tagihan & pembayaran</span></div>
+        <div class="auth-feature"><i class="fas fa-arrow-up"></i><span>Upgrade paket kapan saja</span></div>
+        <div class="auth-feature"><i class="fas fa-headset"></i><span>Support 24/7 langsung dari dashboard</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="auth-form-side">
+    <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Kembali ke Home</a>
+
+    <div class="auth-title">
+      <h1 id="authTitle">Masuk ke Akun Anda</h1>
+      <p id="authSubtitle">Belum punya akun? Daftar gratis sekarang.</p>
+    </div>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-tab="login"><i class="fas fa-sign-in-alt"></i> Masuk</button>
+      <button class="auth-tab" data-tab="register"><i class="fas fa-user-plus"></i> Daftar</button>
+    </div>
+
+    <div class="alert" id="authAlert"><i class="fas fa-info-circle"></i><span id="alertMessage"></span></div>
+
+    <form class="auth-form active" id="loginForm" onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label>Email atau Nomor WhatsApp <span>*</span></label>
+        <div class="input-wrapper">
+          <input type="text" id="loginEmail" placeholder="email@contoh.com atau 08xx" required>
+          <i class="fas fa-user input-icon"></i>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Password <span>*</span></label>
+        <div class="input-wrapper has-toggle">
+          <input type="password" id="loginPassword" placeholder="Masukkan password Anda" required>
+          <i class="fas fa-lock input-icon"></i>
+          <button type="button" class="toggle-password" onclick="togglePassword('loginPassword', this)"><i class="fas fa-eye"></i></button>
+        </div>
+      </div>
+      <div class="form-options">
+        <label class="checkbox-wrapper"><input type="checkbox"> Ingat saya</label>
+        <a href="#" class="forgot-link">Lupa password?</a>
+      </div>
+      <button type="submit" class="btn-submit"><i class="fas fa-sign-in-alt"></i> Masuk</button>
+    </form>
+
+    <form class="auth-form" id="registerForm" onsubmit="handleRegister(event)">
+      <div class="form-group">
+        <label>Nama Lengkap <span>*</span></label>
+        <div class="input-wrapper">
+          <input type="text" id="regName" placeholder="Nama lengkap Anda" required>
+          <i class="fas fa-user input-icon"></i>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email <span>*</span></label>
+        <div class="input-wrapper">
+          <input type="email" id="regEmail" placeholder="email@contoh.com" required>
+          <i class="fas fa-envelope input-icon"></i>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Nomor WhatsApp <span>*</span></label>
+        <div class="input-wrapper">
+          <input type="tel" id="regPhone" placeholder="08xx-xxxx-xxxx" required>
+          <i class="fas fa-phone input-icon"></i>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Password <span>*</span></label>
+        <div class="input-wrapper has-toggle">
+          <input type="password" id="regPassword" placeholder="Minimal 8 karakter" minlength="8" required>
+          <i class="fas fa-lock input-icon"></i>
+          <button type="button" class="toggle-password" onclick="togglePassword('regPassword', this)"><i class="fas fa-eye"></i></button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Konfirmasi Password <span>*</span></label>
+        <div class="input-wrapper has-toggle">
+          <input type="password" id="regPasswordConfirm" placeholder="Ulangi password" required>
+          <i class="fas fa-lock input-icon"></i>
+          <button type="button" class="toggle-password" onclick="togglePassword('regPasswordConfirm', this)"><i class="fas fa-eye"></i></button>
+        </div>
+      </div>
+      <div class="terms-text">Dengan mendaftar, Anda menyetujui <a href="#">Syarat & Ketentuan</a> serta <a href="#">Kebijakan Privasi</a> Indotel.</div>
+      <button type="submit" class="btn-submit"><i class="fas fa-user-plus"></i> Daftar Sekarang</button>
+    </form>
+  </div>
+</div>
+
+<script>
+const tabs = document.querySelectorAll('.auth-tab');
+const forms = document.querySelectorAll('.auth-form');
+const authTitle = document.getElementById('authTitle');
+const authSubtitle = document.getElementById('authSubtitle');
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const target = tab.dataset.tab;
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    forms.forEach(f => f.classList.remove('active'));
+    document.getElementById(target + 'Form').classList.add('active');
+    if (target === 'login') {
+      authTitle.textContent = 'Masuk ke Akun Anda';
+      authSubtitle.textContent = 'Belum punya akun? Daftar gratis sekarang.';
+    } else {
+      authTitle.textContent = 'Buat Akun Baru';
+      authSubtitle.textContent = 'Sudah punya akun? Masuk di sini.';
+    }
+    hideAlert();
+  });
+});
+
+function togglePassword(id, btn) {
+  const input = document.getElementById(id);
+  const icon = btn.querySelector('i');
+  if (input.type === 'password') { input.type = 'text'; icon.className = 'fas fa-eye-slash'; }
+  else { input.type = 'password'; icon.className = 'fas fa-eye'; }
+}
+
+function showAlert(msg, type = 'error') {
+  const alert = document.getElementById('authAlert');
+  document.getElementById('alertMessage').textContent = msg;
+  alert.className = 'alert show ' + type;
+  alert.querySelector('i').className = type === 'error' ? 'fas fa-exclamation-circle' : 'fas fa-check-circle';
+}
+
+function hideAlert() { document.getElementById('authAlert').classList.remove('show'); }
+
+function handleLogin(e) {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  const users = JSON.parse(localStorage.getItem('indotel_users') || '[]');
+  const user = users.find(u => (u.email === email || u.phone === email) && u.password === password);
+  if (user) {
+    localStorage.setItem('indotel_current_user', JSON.stringify({ name: user.name, email: user.email, phone: user.phone, loginAt: new Date().toISOString() }));
+    showAlert('Login berhasil! Mengalihkan ke dashboard...', 'success');
+    setTimeout(() => window.location.href = 'dashboard.html', 1000);
+  } else {
+    showAlert('Email/WhatsApp atau password salah.', 'error');
+  }
+}
+
+function handleRegister(e) {
+  e.preventDefault();
+  const name = document.getElementById('regName').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const phone = document.getElementById('regPhone').value.trim();
+  const password = document.getElementById('regPassword').value;
+  const passwordConfirm = document.getElementById('regPasswordConfirm').value;
+  if (password !== passwordConfirm) { showAlert('Konfirmasi password tidak cocok.', 'error'); return; }
+  if (password.length < 8) { showAlert('Password minimal 8 karakter.', 'error'); return; }
+  const users = JSON.parse(localStorage.getItem('indotel_users') || '[]');
+  if (users.some(u => u.email === email)) { showAlert('Email sudah terdaftar.', 'error'); return; }
+  if (users.some(u => u.phone === phone)) { showAlert('Nomor WhatsApp sudah terdaftar.', 'error'); return; }
+  users.push({ name, email, phone, password, registeredAt: new Date().toISOString() });
+  localStorage.setItem('indotel_users', JSON.stringify(users));
+  localStorage.setItem('indotel_current_user', JSON.stringify({ name, email, phone, loginAt: new Date().toISOString() }));
+  showAlert('Pendaftaran berhasil! Mengalihkan ke dashboard...', 'success');
+  setTimeout(() => window.location.href = 'dashboard.html', 1200);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('tab') === 'register') document.querySelector('[data-tab="register"]').click();
+  const pkg = params.get('package');
+  if (pkg) localStorage.setItem('indotel_selected_package', pkg);
+});
+</script>
+
+</body>
+</html>
