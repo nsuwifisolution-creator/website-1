@@ -108,4 +108,50 @@
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">Paket Layanan</span>
-                <h2>Pilih Paket Ses
+                <h2>Pilih Paket Sesuai Kebutuhan</h2>
+                <p>Harga transparan, tanpa biaya tersembunyi. Semua paket sudah termasuk modem WiFi gratis.</p>
+            </div>
+            <div class="pricing-grid">
+                @forelse($packages as $pkg)
+                    <div class="pricing-card {{ $pkg['isPopular'] ? 'popular' : '' }}">
+                        @if($pkg['isPopular'])
+                            <span class="popular-badge">Paling Populer</span>
+                        @endif
+                        <h3>{{ $pkg['name'] }}</h3>
+                        <p class="speed">{{ $pkg['speed'] }}</p>
+                        <div class="price">
+                            @if($pkg['price'] > 0)
+                                <span class="currency">Rp</span>
+                                <span class="amount">{{ number_format($pkg['price'] / 1000, 0) }}</span>
+                                <span class="period">rb/bln</span>
+                            @else
+                                <span class="amount" style="font-size:28px;">Custom</span>
+                            @endif
+                        </div>
+                        <ul class="pricing-features">
+                            @foreach($pkg['features'] as $feature)
+                                <li><i class="fas fa-check-circle"></i> {{ $feature }}</li>
+                            @endforeach
+                        </ul>
+                        <a href="{{ route('register') }}?package={{ $pkg['slug'] }}" 
+                           class="btn {{ $pkg['isPopular'] ? 'btn-primary' : 'btn-outline' }}" 
+                           style="width:100%;justify-content:center;">
+                            {{ $pkg['price'] > 0 ? 'Pilih Paket' : 'Hubungi Sales' }}
+                        </a>
+                    </div>
+                @empty
+                    <p style="text-align:center;grid-column:1/-1;color:#6B7A8F;">Memuat paket...</p>
+                @endforelse
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Siap Beralih ke Indotel?</h2>
+            <p>Daftar sekarang dan rasakan pengalaman internet cepat, stabil, dan unlimited.</p>
+            <a href="{{ route('register') }}" class="btn btn-primary"><i class="fas fa-rocket"></i> Daftar Sekarang</a>
+        </div>
+    </section>
+@endsection
